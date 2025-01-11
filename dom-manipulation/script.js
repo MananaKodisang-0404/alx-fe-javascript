@@ -9,6 +9,12 @@ const quotes = [
 function showRandomQuote() {
     const quoteDisplay = document.getElementById("quoteDisplay");
 
+    // Check if the requisite DOM element exists
+    if (!quoteDisplay) {
+        console.error("Error: Element with ID 'quoteDisplay' not found.");
+        return;
+    }
+
     // Check if there are any quotes to display
     if (quotes.length === 0) {
         quoteDisplay.textContent = "No quotes available. Add some quotes!";
@@ -25,8 +31,17 @@ function showRandomQuote() {
 
 // Function to add a new quote
 function addQuote() {
-    const newQuoteText = document.getElementById("newQuoteText").value.trim();
-    const newQuoteCategory = document.getElementById("newQuoteCategory").value.trim();
+    const newQuoteTextInput = document.getElementById("newQuoteText");
+    const newQuoteCategoryInput = document.getElementById("newQuoteCategory");
+
+    // Validate that input fields exist
+    if (!newQuoteTextInput || !newQuoteCategoryInput) {
+        console.error("Error: Input fields for adding quotes are missing.");
+        return;
+    }
+
+    const newQuoteText = newQuoteTextInput.value.trim();
+    const newQuoteCategory = newQuoteCategoryInput.value.trim();
 
     // Validate input
     if (newQuoteText === "" || newQuoteCategory === "") {
@@ -48,14 +63,29 @@ function addQuote() {
     quotes.push({ text: newQuoteText, category: newQuoteCategory });
 
     // Clear input fields
-    document.getElementById("newQuoteText").value = "";
-    document.getElementById("newQuoteCategory").value = "";
+    newQuoteTextInput.value = "";
+    newQuoteCategoryInput.value = "";
 
     alert("Quote added successfully!");
 }
 
 // Attach event listeners after DOM content is loaded
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("newQuote").addEventListener("click", showRandomQuote);
-    document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
+    const newQuoteButton = document.getElementById("newQuote");
+    const addQuoteButton = document.getElementById("addQuoteBtn");
+
+    // Validate buttons
+    if (!newQuoteButton) {
+        console.error("Error: 'Show New Quote' button not found.");
+        return;
+    }
+    if (!addQuoteButton) {
+        console.error("Error: 'Add Quote' button not found.");
+        return;
+    }
+
+    // Attach event listeners
+    newQuoteButton.addEventListener("click", showRandomQuote);
+    addQuoteButton.addEventListener("click", addQuote);
 });
+
