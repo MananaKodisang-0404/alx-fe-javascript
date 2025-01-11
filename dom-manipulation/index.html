@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Quote Generator</title>
     <style>
-        /* Basic styles for the application */
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
@@ -17,7 +16,7 @@
             border-radius: 5px;
             background-color: #f9f9f9;
         }
-        input, select, button {
+        input, button {
             margin: 5px 0;
             padding: 8px;
             border: 1px solid #ccc;
@@ -40,18 +39,8 @@
         <button id="addQuoteBtn">Add Quote</button>
     </div>
 
-    <h2>Filter Quotes by Category</h2>
-    <select id="categoryFilter" onchange="filterQuotes()">
-        <option value="all">All Categories</option>
-    </select>
-
-    <h2>Import/Export Quotes</h2>
-    <div>
-        <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
-        <button id="exportQuotesBtn">Export Quotes</button>
-    </div>
-
     <script src="script.js"></script>
 </body>
 </html>
+
 
