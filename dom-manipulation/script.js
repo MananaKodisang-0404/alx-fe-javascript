@@ -88,4 +88,3 @@ document.addEventListener("DOMContentLoaded", () => {
     newQuoteButton.addEventListener("click", showRandomQuote);
     addQuoteButton.addEventListener("click", addQuote);
 });
-
