@@ -9,6 +9,12 @@ const quotes = [
 function showRandomQuote() {
     const quoteDisplay = document.getElementById("quoteDisplay");
 
+    // Check if the requisite DOM element exists
+    if (!quoteDisplay) {
+        console.error("Error: Element with ID 'quoteDisplay' not found.");
+        return;
+    }
+
     // Check if there are any quotes to display
     if (quotes.length === 0) {
         quoteDisplay.textContent = "No quotes available. Add some quotes!";
@@ -25,9 +31,19 @@ function showRandomQuote() {
 
 // Function to add a new quote
 function addQuote() {
+    // Get input fields
+    const newQuoteTextInput = document.getElementById("newQuoteText");
+    const newQuoteCategoryInput = document.getElementById("newQuoteCategory");
+
+    // Check if requisite DOM elements exist
+    if (!newQuoteTextInput || !newQuoteCategoryInput) {
+        console.error("Error: Required input fields ('newQuoteText' or 'newQuoteCategory') not found.");
+        return;
+    }
+
     // Get and trim the input values
-    const newQuoteText = document.getElementById("newQuoteText").value.trim();
-    const newQuoteCategory = document.getElementById("newQuoteCategory").value.trim();
+    const newQuoteText = newQuoteTextInput.value.trim();
+    const newQuoteCategory = newQuoteCategoryInput.value.trim();
 
     // Validate input values
     if (newQuoteText === "" || newQuoteCategory === "") {
@@ -47,21 +63,30 @@ function addQuote() {
     quotes.push({ text: newQuoteText, category: newQuoteCategory });
 
     // Clear the input fields
-    document.getElementById("newQuoteText").value = "";
-    document.getElementById("newQuoteCategory").value = "";
+    newQuoteTextInput.value = "";
+    newQuoteCategoryInput.value = "";
 
     // Provide user feedback
     alert("Quote added successfully!");
 
     // Reset focus to the quote text input field
-    document.getElementById("newQuoteText").focus();
+    newQuoteTextInput.focus();
 }
 
 // Attach event listeners after DOM content is loaded
 document.addEventListener("DOMContentLoaded", () => {
+    // Check if requisite buttons exist
+    const newQuoteButton = document.getElementById("newQuote");
+    const addQuoteButton = document.getElementById("addQuoteBtn");
+
+    if (!newQuoteButton || !addQuoteButton) {
+        console.error("Error: Required buttons ('newQuote' or 'addQuoteBtn') not found.");
+        return;
+    }
+
     // Attach event listener for "Show New Quote" button
-    document.getElementById("newQuote").addEventListener("click", showRandomQuote);
+    newQuoteButton.addEventListener("click", showRandomQuote);
 
     // Attach event listener for "Add Quote" button
-    document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
+    addQuoteButton.addEventListener("click", addQuote);
 });
